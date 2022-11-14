@@ -1,0 +1,9 @@
+.titulo-d {
+    color: var(--cor-tituloD);
+    font-family: var(--font-titulo);
+    font-weight: 600;
+}
+/* PROJETO */
+.sect-projeto{
+    margin-top: 4rem;
+  }

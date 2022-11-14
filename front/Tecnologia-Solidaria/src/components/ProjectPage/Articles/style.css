@@ -1,0 +1,24 @@
+.titulo {
+  color: var(--cor-primaria);
+  font-family: var(--font-titulo);
+  font-weight: 600;
+}
+.div-article {
+  border-radius: 10px;
+  margin-top: 2rem;
+  background-color: var(--cor-background);
+}
+.div-article p {
+  text-align: justify;
+}
+.img-projeto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+article .row {
+  margin-top: 2rem;
+}

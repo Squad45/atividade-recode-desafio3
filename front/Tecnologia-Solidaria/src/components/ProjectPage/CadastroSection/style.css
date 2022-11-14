@@ -1,0 +1,54 @@
+.irCadastro{
+    display: flex; 
+    width:100%; 
+    justify-content: center; 
+    align-items: center;
+}
+.cadastro-projeto{
+    margin-top: 2rem;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: var(--cor-terciaria);
+  }
+  .cadastro-projeto .row{
+    margin-top: 2rem;
+  }
+  .col-proj{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .cad-proj{
+    width: 50%;
+    text-align:center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .cad-proj p{
+    font-size: 20px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    font-family: var(--font-paragrafo);
+    color: var(--cor-primaria);
+  }
+  .cadA-proj{
+    text-decoration: none;
+    display: flex;
+    width: 50%;
+    height: 60px;
+    font-family: var(--font-paragrafo);
+    letter-spacing: 1px;
+    color: var(--cor-font-button);
+    background-color: #177E89;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+  .cadA-proj:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: var(--cor-font-button);
+    transform: scale(0.98);
+  }
