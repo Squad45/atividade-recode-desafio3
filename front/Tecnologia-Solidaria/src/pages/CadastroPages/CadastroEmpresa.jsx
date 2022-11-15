@@ -1,56 +1,57 @@
-import React from "react";
-import { useState } from "react";
-import ImagemFundo from "../../assets/Saly-12.png"
+import React, { useState } from "react";
+import "./CadastroEmpresaCSS.css";
+import ImagemFundo from "../../assets/Saly-12.png";
+import { Link } from "react-router-dom";
 
-import "./CadastroPessoaCSS.css"
-export default function CadastroPessoa() {
-    //para trocar a visibilidade (1000 vezes mais facil que no vanilla)
-    const [ativo, setAtivo] = useState(false);
-    const [ativoII, setAtivoII] = useState(false);
+export default function CadastroEmpresa() {
+  const [ativo, setAtivo] = useState(false);
+  const [ativoII, setAtivoII] = useState(false);
+  const [clienteEmp, setClienteEmp] = useState({
+    nomeRep: "",
+    cargoRep: "",
+    instituicao: "",
+    email: "",
+    telefone: "",
+    cnpj: "",
+    endereco: {
+      cep: "",
+      uf: "",
+      pontoRef: "",
+    },
+    escolha: "",
+    equipamento: "",
+    explicacao: ""
+  });
 
-    const [clientePes, setClientePes] = useState({
-      nome: "",
-      email: "",
-      telefone: "",
-      cpf: "",
-      endereco:{
-        cep: "",
-        uf: "",
-        rua: "",
-        pontoRed: ""
-      },
-      escolha: "",
-      equipamento: "",
-      explicacao: ""
-    })
-    const {nome, email, telefone, cpf, escolha, equipamento, explicacao} = clientePes;
-    const {cep, uf, rua, pontoRed} = clientePes.endereco;
-    
-    const ChangeVisibility = () => {
-        setAtivo(!ativo);
-    }
-    const showOptions = () => {
-      setAtivoII(!ativoII);
-    }
-    const choice = (e) => {
-      setClientePes({...clientePes, [e.target.name]:e.target.value})
-      console.log(escolha)
-    }
+  const { nomeRep, cargoRep, instituicao, email, telefone, cnpj, escolha, equipamento, explicacao } = clienteEmp;
+  const { cep, uf, pontoRef } = clienteEmp.endereco;
+
+  const ChangeVisibility = () => {
+    setAtivo(!ativo);
+  };
+  const showOptions = () => {
+    setAtivoII(!ativoII);
+  };
+  const choice = (e) => {
+    setClienteEmp({...clienteEmp, [e.target.name]:e.target.value})
+    console.log(escolha)
+  }
   return (
     // <!-- background da pagina -->
     <section className="container-fluid sect-form">
       {/* <!-- imagem de fundo --> */}
       <div className="img-back">
-        <img src={ImagemFundo}/>
+        <img src={ImagemFundo} />
       </div>
 
       <main className="main-form-geral">
         {/* <!-- icons de navegação --> */}
         <div className="icon">
           {/* <!-- icon 1 --> */}
-          <button 
-          className="icon-btn btn-1"
-          style={{boxShadow: "0 0 8px rgba(0, 0, 0, 0.6)"}}>
+          <button
+            className="icon-btn btn-1"
+            style={{ boxShadow: "0 0 8px rgba(0, 0, 0, 0.6)" }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="40"
@@ -64,16 +65,23 @@ export default function CadastroPessoa() {
             </svg>
           </button>
 
-          <div 
-          className="linha" 
-          style={{backgroundColor: ativo ? "#97c9cf" : "white", boxShadow: "0 0 8px rgba(0, 0, 0, 0.6)"}} >
-          </div>
+          <div
+            className="linha"
+            style={{
+              backgroundColor: ativo ? "#97c9cf" : "white",
+              boxShadow: "0 0 8px rgba(0, 0, 0, 0.6)",
+            }}
+          ></div>
 
           {/* <!-- icon 2 --> */}
-          <button 
-          className="icon-btn btn-2" 
-          style={{backgroundColor: ativo ? "#97c9cf" : "white", boxShadow: "0 0 8px rgba(0, 0, 0, 0.6)"}} 
-          id="iconP-2">
+          <button
+            className="icon-btn btn-2"
+            style={{
+              backgroundColor: ativo ? "#97c9cf" : "white",
+              boxShadow: "0 0 8px rgba(0, 0, 0, 0.6)",
+            }}
+            id="iconE-2"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="40"
@@ -93,20 +101,45 @@ export default function CadastroPessoa() {
             </svg>
           </button>
         </div>
+
         {/* <!-- titulo --> */}
-        <h2>Cadastro pessoal</h2>
+        <h3>Cadastrando Instituição/Empresa</h3>
 
         {/* <!-- começo do formulario pessoa --> */}
-        <form className="form-pessoa" id="form-pessoa" action="" method="post">
+        <form className="form-empresa" id="form-empresa" method="POST">
           {/* <!-- PARTE 1 --> */}
-          <div className={ativo ? "disp-none" : "nada"} id="formP1">
+          <div 
+          className={ativo ? "disp-none" : "nada"} 
+          id="formE1">
             {/* <!-- input de texto Nome --> */}
             <div className="div-input">
-              <label for="nome">Nome:</label>
+              <label for="nome">Nome do Representante</label>
               <input
                 type="text"
                 name="nome"
                 placeholder="Nome completo"
+                required
+              />
+              <div className="underline"></div>
+            </div>
+            {/* <!-- input de texto Cargo --> */}
+            <div className="div-input">
+              <label for="cargo">Cargo do Representante</label>
+              <input
+                type="text"
+                name="cargo"
+                placeholder="Digite..."
+                required
+              />
+              <div className="underline"></div>
+            </div>
+            {/* <!-- input de texto nomeEmp --> */}
+            <div className="div-input">
+              <label for="nomeEmp">Nome da Empresa/Escola</label>
+              <input
+                type="text"
+                name="nomeEmp"
+                placeholder="Digite..."
                 required
               />
               <div className="underline"></div>
@@ -135,10 +168,10 @@ export default function CadastroPessoa() {
             </div>
             {/* <!-- input de texto CPF --> */}
             <div className="div-input">
-              <label for="cpf">CPF:</label>
+              <label for="cpf">CNPJ:</label>
               <input
                 type="text"
-                name="cpf"
+                name="cnpj"
                 placeholder="Apenas número"
                 required
               />
@@ -146,30 +179,35 @@ export default function CadastroPessoa() {
             </div>
           </div>
           {/* <!-- PARTE 2 --> */}
-          <div className={!ativo ? "disp-none" : "nada"} id="formP2">
+          <div 
+          className={!ativo ? "disp-none" : "nada"} 
+          id="formE2">
             <div className="div-input">
-              <label for="nome">CEP</label>
-              <div style={{display: "flex"}}>
+              <label for="nome">CEP e UF</label>
+              <div style={{ display: "flex" }}>
                 <input
                   type="text"
                   name="cep"
                   placeholder="CEP"
                   required
-                  style={{width: "80%"}}
+                  style={{ width: "80%" }}
                 />
                 <input
                   type="text"
                   name="uf"
                   placeholder="UF"
                   required
-                  style={{width: "10%", borderLeft: "2px solid rgba(0,0,0,0.5)"}}
+                  style={{
+                    width: "10%",
+                    borderLeft: "2px solid rgba(0,0,0,0.5)",
+                  }}
                 />
               </div>
               <div className="underline"></div>
             </div>
 
             <div className="div-input">
-              <label for="endereço">Endereço</label>
+              <label for="email">Endereço</label>
               <input
                 type="text"
                 name="endereco"
@@ -190,15 +228,14 @@ export default function CadastroPessoa() {
               <div className="underline"></div>
             </div>
 
-            <div className="escolha" id="escolhaPessoa">
-              <h5>Eu:</h5>
+            <div className="escolha" id="escolhaEmpresa">
+              <h5>Nós:</h5>
               <div className="div-input">
-                <select
-                  name="escolha"
-                  onChange={(e)=>choice(e)}
-                  required
-                  
-                >
+                <select 
+                name="escolha" 
+                onChange={(e)=>choice(e)}
+                required
+                value={escolha}>
                   <option selected>--</option>
                   <option value="doador">Sou doador</option>
                   <option value="beneficiario">Preciso de equipamento</option>
@@ -206,6 +243,7 @@ export default function CadastroPessoa() {
                 <div className="underline"></div>
               </div>
             </div>
+
             <div
               style={{textAlign: "center"}}
               className={!ativo ? "btn-continue disp-none" : "btn-continue"}
@@ -214,7 +252,7 @@ export default function CadastroPessoa() {
               continue
             </div>
           </div>
-          {/* <!-- PARTE 3 --> */}
+           {/* <!-- PARTE 3 --> */}
           <div
             className={escolha == "doador" && ativoII && ativo ? "nada":"disp-none" }
             id="formE3"
@@ -266,12 +304,12 @@ export default function CadastroPessoa() {
           </div>
         </form>
 
-        {/* <!-- BOTAO --> */}
+        {/* <!-- BOTÕES--> */}
         <div className="next-prev">
           {/* <!-- BOTAO PREV --> */}
           <button
             className={!ativo ? "btn-prev disp-none" : "btn-prev"}
-            id="btn-prevP"
+            id="btn-prevE"
             onClick={ChangeVisibility}
           >
             <svg
@@ -289,10 +327,11 @@ export default function CadastroPessoa() {
             </svg>
           </button>
           {/* <!-- BOTAO NEXT --> */}
-          <button 
-          className={ativo ? "btn-next disp-none" : "btn-next"} 
-          id="btn-nextP" 
-          onClick={ChangeVisibility}>
+          <button
+            className={ativo ? "btn-next disp-none" : "btn-next"}
+            id="btn-nextE"
+            onClick={ChangeVisibility}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

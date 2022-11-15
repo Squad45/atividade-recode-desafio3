@@ -141,3 +141,25 @@
   .escolha{
     color: white;
   }
+  .btn-continue{
+    border: none;
+    border-radius: 10px;
+    width: 90px;
+    margin-top: 10rem;
+    padding: 0.4rem;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  }
+  .div-input select{
+    border: none;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0);
+    color: black;
+    margin-bottom: 0.5rem;
+  }
+  .div-input select:focus{
+    background-color: rgba(20, 20, 20, 0.185);
+    border-radius: 10px;
+  }
+  .div-input select:focus ~ .underline::after{
+    transform: scalex(1);
+  }

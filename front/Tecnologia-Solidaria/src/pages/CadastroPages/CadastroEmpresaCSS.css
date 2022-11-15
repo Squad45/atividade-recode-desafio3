@@ -1,0 +1,170 @@
+.main-form-geral {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+  z-index: 2;
+  background-color: rgba(163, 162, 162, 0.45);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  backdrop-filter: blur(2px);
+  width: 400px;
+  height: auto;
+  padding: 2rem;
+}
+.form-empresa {
+  width: 100%;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.linha {
+  width: 4rem;
+  height: 2px;
+  background-color: white;
+}
+.icon-btn {
+  border: none;
+  border-radius: 50px;
+  padding: 10px;
+}
+.btn-1 {
+  background-color: #97c9cf;
+}
+.main-form-geral h2 {
+  font-family: var(--font-titulo);
+  color: white;
+  margin-bottom: 2rem;
+  position: relative;
+}
+.main-form-geral h3 {
+  font-family: var(--font-titulo);
+  color: white;
+  margin-bottom: 2rem;
+  position: relative;
+}
+.div-input {
+  font-family: var(--font-paragrafo);
+  display: flex;
+  flex-direction: column;
+  color: white;
+  position: relative;
+}
+.ancora-escolha {
+  display: flex;
+  height: 60px;
+  font-family: var(--font-paragrafo);
+  letter-spacing: 1px;
+  color: black;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  text-decoration: none;
+  background-color: #f1f7ed;
+}
+.ancora-escolha:hover {
+  color: black;
+  transform: scale(0.9);
+}
+
+.div-input input {
+  border: none;
+  outline: none;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  margin-bottom: 0.5rem;
+}
+.div-input input::placeholder {
+  color: rgba(248, 246, 246, 0.7);
+}
+.next-prev {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: space-between;
+}
+.btn-next,
+.btn-prev {
+  float: right;
+  border: none;
+  border-radius: 10px;
+  width: 40px;
+  margin-top: 2rem;
+  padding: 0.4rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+.btn-continue {
+  border: none;
+  border-radius: 10px;
+  width: 90px;
+  margin-top: 2rem;
+  padding: 0.4rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+.div-input .underline::before {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  bottom: -1px;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+}
+.div-input .underline::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  bottom: -1px;
+  left: 0;
+  background: white;
+  transform: scalex(0);
+  transition: all 0.3s ease-in-out;
+  transform-origin: left;
+}
+.div-input input:focus ~ .underline::after {
+  transform: scalex(1);
+}
+.div-input input:focus {
+  background-color: rgba(20, 20, 20, 0.185);
+  border-radius: 10px;
+}
+.disp-none {
+  display: none;
+}
+.escolha {
+  color: white;
+}
+.btn-continue {
+  border: none;
+  border-radius: 10px;
+  text-decoration: none;
+  width: 90px;
+  color: black;
+  background-color: white;
+  margin-top: 2rem;
+  padding: 0.4rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+.btn-continue:hover{
+  text-decoration: none;
+}
+.div-input select{
+  border: none;
+  outline: none;
+  background-color: rgba(0, 0, 0, 0);
+  color: black;
+  margin-bottom: 0.5rem;
+}
+.div-input select:focus{
+  background-color: rgba(20, 20, 20, 0.185);
+  border-radius: 10px;
+}
+.div-input select:focus ~ .underline::after{
+  transform: scalex(1);
+}
