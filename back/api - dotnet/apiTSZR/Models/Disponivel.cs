@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace apiTSZR.Models
 {
+    [Table("equipamentos_disponiveis")]
     public class Disponivel
     {
         

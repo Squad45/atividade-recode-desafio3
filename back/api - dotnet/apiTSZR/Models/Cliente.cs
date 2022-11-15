@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace apiTSZR.Models
 {
+    [Table("clientes")]
     public class Cliente
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

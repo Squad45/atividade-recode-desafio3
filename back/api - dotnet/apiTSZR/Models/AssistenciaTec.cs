@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace apiTSZR.Models
 {
+    [Table("assistencia_tecnica")]
     public class AssistenciaTec
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

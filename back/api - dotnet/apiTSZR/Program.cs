@@ -1,8 +1,17 @@
 global using Microsoft.EntityFrameworkCore;
 global using System.ComponentModel.DataAnnotations.Schema;
 global using System.ComponentModel.DataAnnotations;
+global using apiTSZR.Models;
+using apiTSZR.Data;
 var builder = WebApplication.CreateBuilder(args);
 
+
+// Fazendo a conexão
+string mySqlConnection =
+    builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContextPool<DataContext>(options =>
+                        options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
 // Add services to the container.
 
 builder.Services.AddControllers();

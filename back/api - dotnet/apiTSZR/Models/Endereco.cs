@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace apiTSZR.Models
 {
+    [Table("Enderecos")]
     public class Endereco
     {   
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

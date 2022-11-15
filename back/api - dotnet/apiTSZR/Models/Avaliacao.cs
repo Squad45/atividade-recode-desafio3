@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace apiTSZR.Models
 {
+    [Table("avaliacoes")]
     public class Avaliacao
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
