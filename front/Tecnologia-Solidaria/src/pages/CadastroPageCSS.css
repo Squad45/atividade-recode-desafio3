@@ -1,0 +1,104 @@
+/* CADASTRO */
+.main-form-geral{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+    z-index: 2;
+    background-color: rgba(163, 162, 162, 0.45);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    backdrop-filter: blur(2px);
+    width: 400px;
+    height: auto;    
+    padding: 2rem;
+  
+  }
+  .main-form-geral h2{
+    font-family: var(--font-titulo);
+    color: white;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .main-form-geral h3{
+    font-family: var(--font-titulo);
+    color: white;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+.sect-form{
+    background: linear-gradient(100deg, rgb(83, 82, 237) 16%, rgb(23, 124, 135) 78%);
+    height: 110vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .img-back{
+    position: absolute;
+    z-index: 1;
+  }
+  .div-input{
+    font-family: var(--font-paragrafo);
+    display: flex;
+    flex-direction: column;
+    color: white;
+    position: relative;
+  }
+  .ancora-escolha{
+    display: flex;
+    height: 60px;
+    font-family: var(--font-paragrafo);
+    letter-spacing: 1px;
+    color: black;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+    text-decoration: none;
+    background-color: #F1F7ED;
+  }
+  .ancora-escolha:hover{
+    color: black;
+    transform: scale(0.9);
+  }
+  .div-input input{
+    border: none;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+  .div-input input::placeholder{
+    color:rgba(248, 246, 246, 0.7);
+  }
+  #escolha-1{
+    display: flex;
+    height: 60px;
+    font-family: var(--font-paragrafo);
+    letter-spacing: 1px;
+    color: black;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+    text-decoration: none;
+    background-color: #F1F7ED;
+  }
+  #escolha-2{
+    display: flex;
+    height: 60px;
+    font-family: var(--font-paragrafo);
+    letter-spacing: 1px;
+    color: black;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+    text-decoration: none;
+    background-color: #F1F7ED;
+  }
+  .form-pessoa{
+    width: 100%;
+  }

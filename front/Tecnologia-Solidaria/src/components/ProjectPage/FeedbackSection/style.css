@@ -1,0 +1,21 @@
+.icon-feedback{
+    display: flex;
+    gap: 10px;
+    text-shadow: 0 2px 5px rgb(0, 0, 0, 0.5);
+}
+
+.parag-feedback{
+    color: var(--cor-paragrafoD);
+    font-weight: 500;
+}
+
+.sect-feedback{
+    background-color: var(--cor-secundaria);
+    box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.3);
+    
+}
+@media (max-width: 780px){
+    .sect-feedback{
+      margin-top: 400px;
+    }
+}

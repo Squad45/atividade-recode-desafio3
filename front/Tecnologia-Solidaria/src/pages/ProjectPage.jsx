@@ -1,6 +1,7 @@
 import React from "react";
 import SecaoArtigo from "../components/ProjectPage/Articles";
 import SecaoCadastro from "../components/ProjectPage/CadastroSection";
+import SecaoFeedback from "../components/ProjectPage/FeedbackSection";
 
 import "./ProjectPageCSS.css";
 export default function ProjectPage() {
@@ -17,6 +18,7 @@ export default function ProjectPage() {
       <SecaoCadastro />
 
       {/* <!-- section onde terá o feedback, ainda ficticio --> */}
+      <SecaoFeedback />
     </>
   );
 }

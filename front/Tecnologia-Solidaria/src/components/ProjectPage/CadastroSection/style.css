@@ -1,3 +1,6 @@
+.titulo-d{
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+}
 .irCadastro{
     display: flex; 
     width:100%; 
@@ -5,9 +8,10 @@
     align-items: center;
 }
 .cadastro-projeto{
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
     margin-top: 2rem;
     border-radius: 10px;
-    padding: 15px;
+    padding: 24px;
     background-color: var(--cor-terciaria);
   }
   .cadastro-projeto .row{
@@ -22,6 +26,7 @@
   .cad-proj{
     width: 50%;
     text-align:center;
+    gap: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
