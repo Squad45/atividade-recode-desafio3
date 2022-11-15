@@ -15,6 +15,5 @@ namespace apiTSZR.Dto
         public string Escolha { get; set; }
         public string? Equipamento { get; set; }
         public string Explicacao { get; set; }
-        public Endereco Endereco { get; set; }
     }
 }

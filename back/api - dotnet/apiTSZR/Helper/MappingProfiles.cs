@@ -20,8 +20,6 @@ namespace apiTSZR.Helper
             CreateMap<Cliente, ClienteDto>();
             CreateMap<ClienteDto, Cliente>();
 
-            CreateMap<Endereco, EnderecoDto>();
-            CreateMap<EnderecoDto, Endereco>();
         }
     }
 }

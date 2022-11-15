@@ -14,7 +14,6 @@ namespace apiTSZR.Data
         }
 
         public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Avaliacao> Avaliacoes { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Equipamento> Equipamentos { get; set; }
@@ -43,24 +42,6 @@ namespace apiTSZR.Data
                 }
 
             );
-            modelBuilder.Entity<Endereco>().HasData(
-                new Endereco
-                {
-                    Id = 1,
-                    Uf = "SP",
-                    Cep = "23430654",
-                    Rua = "Rua das Flores",
-                    PontoRef = "mercearia do Jorge"
-                },
-                new Endereco
-                {
-                    Id = 2,
-                    Uf = "RJ",
-                    Cep = "41264100",
-                    Rua = "Av dos Alfaiates",
-                    PontoRef = "Terminal Alfaiate"
-                }
-            );
             modelBuilder.Entity<Cliente>().HasData(
                 new Cliente
                 {
@@ -71,7 +52,10 @@ namespace apiTSZR.Data
                     Telefone = "11987435467",
                     Escolha = "beneficio",
                     Explicacao = "preciso porque sou estudante",
-                    EnderecoId = 1
+                    Uf = "SP",
+                    Cep = "23430654",
+                    Rua = "Rua das Flores",
+                    PontoRef = "mercearia do Jorge"
                 },
                 new Cliente
                 {
@@ -85,7 +69,10 @@ namespace apiTSZR.Data
                     Escolha = "doador",
                     Equipamento = "Computador",
                     Explicacao = "estou aqui para doar 2 computadores que não usamos mais",
-                    EnderecoId = 2
+                    Uf = "RJ",
+                    Cep = "41264100",
+                    Rua = "Av dos Alfaiates",
+                    PontoRef = "Terminal Alfaiate"
                     
                 }
             );

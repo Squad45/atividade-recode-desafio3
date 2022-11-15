@@ -27,25 +27,8 @@ namespace apiTSZR.Repositories
             return _context.Clientes.Any(c => c.Cnpj == cnpj);
         }
 
-        public bool CreateCliente(Endereco endereco, Cliente cliente)
+        public bool CreateCliente(Cliente cliente)
         {
-            _context.Add(endereco);
-            var createEndereco = _context.Enderecos.Where(e => e.Cep == endereco.Cep && e.Uf == endereco.Uf).FirstOrDefault();
-            var newCliente = new Cliente()
-            {
-                Nome = cliente.Nome,
-                Cpf = cliente.Cpf,
-                Cnpj = cliente.Cnpj,
-                Cargo = cliente.Cargo,
-                Instituicao = cliente.Instituicao,
-                Email = cliente.Email,
-                Telefone = cliente.Telefone,
-                Escolha = cliente.Escolha,
-                Equipamento = cliente.Equipamento,
-                Explicacao = cliente.Explicacao,
-                EnderecoId = createEndereco.Id,
-                Endereco = createEndereco
-            };
             _context.Add(cliente);
             return Save();
         }
@@ -76,10 +59,6 @@ namespace apiTSZR.Repositories
             return _context.Clientes.OrderBy(c => c.Id).ToList();
         }
 
-        public ICollection<Endereco> GetEnderecosByCliente(int id)
-        {
-            return _context.Enderecos.Where(c => c.Id == id).ToList();
-        }
 
         public bool Save()
         {

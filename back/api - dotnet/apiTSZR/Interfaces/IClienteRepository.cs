@@ -15,9 +15,7 @@ namespace apiTSZR.Interfaces
         Cliente GetClienteByCNPJ(string cnpj);
         bool ClienteExist(int id);
 
-        ICollection<Endereco> GetEnderecosByCliente(int id);
-
-        bool CreateCliente(Endereco endereco, Cliente cliente);
+        bool CreateCliente(Cliente cliente);
         bool DeleteCliente(Cliente cliente);
         bool Save();
     }

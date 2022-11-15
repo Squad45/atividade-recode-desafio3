@@ -44,11 +44,18 @@ namespace apiTSZR.Models
         [Column("texto_explicativo", TypeName = "VARCHAR(255)")]
         public string Explicacao { get; set; }
 
-        [ForeignKey("endereco")]
-        public int EnderecoId { get; set; }
+         [Column("uf", TypeName = "VARCHAR(2)")]
+        public string Uf { get; set; }
 
-        public Endereco Endereco { get; set; }
-        
+        [Column("cep", TypeName = "VARCHAR(8)")]
+        public string Cep { get; set; }
+
+        [Column("endereco", TypeName = "VARCHAR(150)")]
+        public string Rua { get; set; }
+
+        [Column("ponto_referencia", TypeName = "VARCHAR(70)")]
+        public string PontoRef { get; set; }
+
         [JsonIgnore]
         public Avaliacao Avaliacao {get; set; }
     }

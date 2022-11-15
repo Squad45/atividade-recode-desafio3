@@ -13,13 +13,11 @@ namespace apiTSZR.Controllers
     public class ClienteController : Controller
     {
         private readonly IClienteRepository _clienteRepository;
-        private readonly IEnderecoRepository _enderecoRepository;
         private readonly IMapper _mapper;
-        public ClienteController(IClienteRepository clienteRepository, IEnderecoRepository enderecoRepository, IMapper mapper)
+        public ClienteController(IClienteRepository clienteRepository, IMapper mapper)
         {
             _clienteRepository = clienteRepository;
             _mapper = mapper;
-            _enderecoRepository = enderecoRepository;
         }
 
         #region "METODOS GET"
@@ -87,9 +85,8 @@ namespace apiTSZR.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateClienteFisico([FromQuery]string cep, [FromQuery]string uf, [FromBody]ClienteDtoFisica clienteCreate)
+        public IActionResult CreateClienteFisico([FromBody]ClienteDto clienteCreate)
         {
-            var endereco = clienteCreate.Endereco;
             // tudo isso para previnir e/ou informar erros
             if(clienteCreate == null)
                 return BadRequest(ModelState);
@@ -108,7 +105,7 @@ namespace apiTSZR.Controllers
 
             var clienteMap = _mapper.Map<Cliente>(clienteCreate);
             
-            if(!_clienteRepository.CreateCliente(endereco, clienteMap))
+            if(!_clienteRepository.CreateCliente(clienteMap))
             {
                 ModelState.AddModelError("", "Ocorreu algo de errado ao salvar");
                 return StatusCode(500, ModelState);

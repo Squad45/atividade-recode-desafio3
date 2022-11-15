@@ -39,6 +39,5 @@ namespace apiTSZR.Dto
         
         public string Explicacao { get; set; }
 
-        public int EnderecoId { get; set; }
     }
 }
