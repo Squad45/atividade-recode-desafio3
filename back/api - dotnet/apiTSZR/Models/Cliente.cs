@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
 namespace apiTSZR.Models
 {
     public class Cliente
@@ -15,6 +20,5 @@ namespace apiTSZR.Models
          public string Explicacao { get; set; }
 
          public Endereco Endereco { get; set; }
-
     }
 }
