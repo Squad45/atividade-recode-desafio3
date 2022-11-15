@@ -32,7 +32,7 @@ CREATE TABLE `clientes` (
     `instituicao` VARCHAR(50) CHARACTER SET utf8mb4 NULL,
     `email` VARCHAR(100) CHARACTER SET utf8mb4 NOT NULL,
     `telefone` VARCHAR(11) CHARACTER SET utf8mb4 NOT NULL,
-    `escolha` VARCHAR(10) CHARACTER SET utf8mb4 NOT NULL,
+    `escolha` VARCHAR(14) CHARACTER SET utf8mb4 NOT NULL,
     `equipamento_doado` VARCHAR(10) CHARACTER SET utf8mb4 NULL,
     `texto_explicativo` VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL,
     `EnderecoId` int NOT NULL,
@@ -82,14 +82,23 @@ CREATE TABLE `doacoes` (
     CONSTRAINT `FK_doacoes_pedido_PedidoId` FOREIGN KEY (`PedidoId`) REFERENCES `pedido` (`Id`) ON DELETE CASCADE
 ) CHARACTER SET=utf8mb4;
 
+INSERT INTO `Enderecos` (`Id`, `cep`, `ponto_referencia`, `endereco`, `uf`)
+VALUES (1, '23430654', 'mercearia do Jorge', 'Rua das Flores', 'SP');
+INSERT INTO `Enderecos` (`Id`, `cep`, `ponto_referencia`, `endereco`, `uf`)
+VALUES (2, '41264100', 'Terminal Alfaiate', 'Av dos Alfaiates', 'RJ');
+
 INSERT INTO `assistencia_tecnica` (`Id`, `loja`)
 VALUES (1, 'Remakker');
-
 INSERT INTO `assistencia_tecnica` (`Id`, `loja`)
 VALUES (2, 'Recuperador Tecnologia');
-
 INSERT INTO `assistencia_tecnica` (`Id`, `loja`)
 VALUES (3, 'Cell Week');
+
+INSERT INTO `clientes` (`Id`, `cargo`, `cnpj`, `cpf`, `email`, `EnderecoId`, `equipamento_doado`, `escolha`, `texto_explicativo`, `instituicao`, `nome`, `telefone`)
+VALUES (1, NULL, NULL, '33344433321', 'robertSil@gmail.com', 1, NULL, 'beneficio', 'preciso porque sou estudante', NULL, 'Roberto Silva', '11987435467');
+
+INSERT INTO `clientes` (`Id`, `cargo`, `cnpj`, `cpf`, `email`, `EnderecoId`, `equipamento_doado`, `escolha`, `texto_explicativo`, `instituicao`, `nome`, `telefone`)
+VALUES (2, 'Gerente', '11222111222133', NULL, 'wallacetrab@hotmail.com', 2, 'Computador', 'doador', 'estou aqui para doar 2 computadores que não usamos mais', 'Hospital Nogueira', 'Fracisco Wallace', '21987224351');
 
 CREATE UNIQUE INDEX `IX_avaliacoes_ClienteId` ON `avaliacoes` (`ClienteId`);
 
@@ -108,7 +117,7 @@ CREATE INDEX `IX_equipamentos_disponiveis_EquipamentoId` ON `equipamentos_dispon
 CREATE INDEX `IX_pedido_AvaliacaoId` ON `pedido` (`AvaliacaoId`);
 
 INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
-VALUES ('20221115163132_SegundaMigracao', '6.0.10');
+VALUES ('20221115193459_TerceiraMigracao', '6.0.10');
 
 COMMIT;
 

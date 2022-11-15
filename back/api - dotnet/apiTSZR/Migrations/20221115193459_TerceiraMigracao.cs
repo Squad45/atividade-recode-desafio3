@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace apiTSZR.Migrations
 {
-    public partial class SegundaMigracao : Migration
+    public partial class TerceiraMigracao : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -68,7 +68,7 @@ namespace apiTSZR.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     telefone = table.Column<string>(type: "VARCHAR(11)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    escolha = table.Column<string>(type: "VARCHAR(10)", nullable: false)
+                    escolha = table.Column<string>(type: "VARCHAR(14)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     equipamento_doado = table.Column<string>(type: "VARCHAR(10)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -208,19 +208,33 @@ namespace apiTSZR.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.InsertData(
-                table: "assistencia_tecnica",
-                columns: new[] { "Id", "loja" },
-                values: new object[] { 1, "Remakker" });
+                table: "Enderecos",
+                columns: new[] { "Id", "cep", "ponto_referencia", "endereco", "uf" },
+                values: new object[,]
+                {
+                    { 1, "23430654", "mercearia do Jorge", "Rua das Flores", "SP" },
+                    { 2, "41264100", "Terminal Alfaiate", "Av dos Alfaiates", "RJ" }
+                });
 
             migrationBuilder.InsertData(
                 table: "assistencia_tecnica",
                 columns: new[] { "Id", "loja" },
-                values: new object[] { 2, "Recuperador Tecnologia" });
+                values: new object[,]
+                {
+                    { 1, "Remakker" },
+                    { 2, "Recuperador Tecnologia" },
+                    { 3, "Cell Week" }
+                });
 
             migrationBuilder.InsertData(
-                table: "assistencia_tecnica",
-                columns: new[] { "Id", "loja" },
-                values: new object[] { 3, "Cell Week" });
+                table: "clientes",
+                columns: new[] { "Id", "cargo", "cnpj", "cpf", "email", "EnderecoId", "equipamento_doado", "escolha", "texto_explicativo", "instituicao", "nome", "telefone" },
+                values: new object[] { 1, null, null, "33344433321", "robertSil@gmail.com", 1, null, "beneficio", "preciso porque sou estudante", null, "Roberto Silva", "11987435467" });
+
+            migrationBuilder.InsertData(
+                table: "clientes",
+                columns: new[] { "Id", "cargo", "cnpj", "cpf", "email", "EnderecoId", "equipamento_doado", "escolha", "texto_explicativo", "instituicao", "nome", "telefone" },
+                values: new object[] { 2, "Gerente", "11222111222133", null, "wallacetrab@hotmail.com", 2, "Computador", "doador", "estou aqui para doar 2 computadores que não usamos mais", "Hospital Nogueira", "Fracisco Wallace", "21987224351" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_avaliacoes_ClienteId",

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace apiTSZR.Models
 {
@@ -33,7 +35,7 @@ namespace apiTSZR.Models
         [Column("telefone", TypeName = "VARCHAR(11)")]
         public string Telefone { get; set; }
 
-        [Column("escolha", TypeName = "VARCHAR(10)")]
+        [Column("escolha", TypeName = "VARCHAR(14)")]
         public string Escolha { get; set; }
 
         [Column("equipamento_doado", TypeName = "VARCHAR(10)")]
@@ -46,6 +48,8 @@ namespace apiTSZR.Models
         public int EnderecoId { get; set; }
 
         public Endereco Endereco { get; set; }
+        
+        [JsonIgnore]
         public Avaliacao Avaliacao {get; set; }
     }
 }

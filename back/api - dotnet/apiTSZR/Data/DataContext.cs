@@ -43,6 +43,52 @@ namespace apiTSZR.Data
                 }
 
             );
+            modelBuilder.Entity<Endereco>().HasData(
+                new Endereco
+                {
+                    Id = 1,
+                    Uf = "SP",
+                    Cep = "23430654",
+                    Rua = "Rua das Flores",
+                    PontoRef = "mercearia do Jorge"
+                },
+                new Endereco
+                {
+                    Id = 2,
+                    Uf = "RJ",
+                    Cep = "41264100",
+                    Rua = "Av dos Alfaiates",
+                    PontoRef = "Terminal Alfaiate"
+                }
+            );
+            modelBuilder.Entity<Cliente>().HasData(
+                new Cliente
+                {
+                    Id = 1,
+                    Nome = "Roberto Silva",
+                    Cpf = "33344433321",
+                    Email = "robertSil@gmail.com",
+                    Telefone = "11987435467",
+                    Escolha = "beneficio",
+                    Explicacao = "preciso porque sou estudante",
+                    EnderecoId = 1
+                },
+                new Cliente
+                {
+                    Id = 2,
+                    Nome = "Fracisco Wallace",
+                    Cnpj = "11222111222133",
+                    Cargo = "Gerente",
+                    Instituicao = "Hospital Nogueira",
+                    Email = "wallacetrab@hotmail.com",
+                    Telefone = "21987224351",
+                    Escolha = "doador",
+                    Equipamento = "Computador",
+                    Explicacao = "estou aqui para doar 2 computadores que não usamos mais",
+                    EnderecoId = 2
+                    
+                }
+            );
         }
     }
 }

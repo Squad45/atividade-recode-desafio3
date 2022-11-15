@@ -2,6 +2,9 @@ global using Microsoft.EntityFrameworkCore;
 global using System.ComponentModel.DataAnnotations.Schema;
 global using System.ComponentModel.DataAnnotations;
 global using apiTSZR.Models;
+global using apiTSZR.Data;
+global using apiTSZR.Interfaces;
+global using apiTSZR.Repositories;
 using apiTSZR.Data;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +15,13 @@ string mySqlConnection =
 
 builder.Services.AddDbContextPool<DataContext>(options =>
                         options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
+
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddControllers().AddJsonOptions(x =>
+                                    x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
+builder.Services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 // Add services to the container.
 
 builder.Services.AddControllers();

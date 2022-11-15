@@ -10,8 +10,8 @@ using apiTSZR.Data;
 namespace apiTSZR.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221115163132_SegundaMigracao")]
-    partial class SegundaMigracao
+    [Migration("20221115193459_TerceiraMigracao")]
+    partial class TerceiraMigracao
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -107,7 +107,7 @@ namespace apiTSZR.Migrations
 
                     b.Property<string>("Escolha")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(10)")
+                        .HasColumnType("VARCHAR(14)")
                         .HasColumnName("escolha");
 
                     b.Property<string>("Explicacao")
@@ -135,6 +135,33 @@ namespace apiTSZR.Migrations
                         .IsUnique();
 
                     b.ToTable("clientes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cpf = "33344433321",
+                            Email = "robertSil@gmail.com",
+                            EnderecoId = 1,
+                            Escolha = "beneficio",
+                            Explicacao = "preciso porque sou estudante",
+                            Nome = "Roberto Silva",
+                            Telefone = "11987435467"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Cargo = "Gerente",
+                            Cnpj = "11222111222133",
+                            Email = "wallacetrab@hotmail.com",
+                            EnderecoId = 2,
+                            Equipamento = "Computador",
+                            Escolha = "doador",
+                            Explicacao = "estou aqui para doar 2 computadores que não usamos mais",
+                            Instituicao = "Hospital Nogueira",
+                            Nome = "Fracisco Wallace",
+                            Telefone = "21987224351"
+                        });
                 });
 
             modelBuilder.Entity("apiTSZR.Models.Disponivel", b =>
@@ -205,6 +232,24 @@ namespace apiTSZR.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Enderecos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cep = "23430654",
+                            PontoRef = "mercearia do Jorge",
+                            Rua = "Rua das Flores",
+                            Uf = "SP"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Cep = "41264100",
+                            PontoRef = "Terminal Alfaiate",
+                            Rua = "Av dos Alfaiates",
+                            Uf = "RJ"
+                        });
                 });
 
             modelBuilder.Entity("apiTSZR.Models.Equipamento", b =>
