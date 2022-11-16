@@ -46,12 +46,12 @@ namespace apiTSZR.Repositories
 
         public Cliente GetClienteByCNPJ(string cnpj)
         {
-            return _context.Clientes.Where(c => c.Cnpj == cnpj).FirstOrDefault();
+            return _context.Clientes.Where(c => c.Cnpj.Trim().ToUpper() == cnpj.TrimEnd().ToUpper()).FirstOrDefault();
         }
 
         public Cliente GetClienteByCPF(string cpf)
         {
-            return _context.Clientes.Where(c => c.Cpf == cpf).FirstOrDefault();
+            return _context.Clientes.Where(c => c.Cpf.Trim().ToUpper() == cpf.TrimEnd().ToUpper()).FirstOrDefault();
         }
 
         public ICollection<Cliente> GetClientes()

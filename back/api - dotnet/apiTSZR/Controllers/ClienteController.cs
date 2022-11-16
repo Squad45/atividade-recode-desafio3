@@ -231,7 +231,7 @@ namespace apiTSZR.Controllers
             }
             return NoContent();
         }
-        [HttpDelete("{cpf}")]
+        [HttpDelete("deleteFisico/{cpf}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
@@ -252,7 +252,7 @@ namespace apiTSZR.Controllers
             }
             return NoContent();
         }
-        [HttpDelete("{cnpj}")]
+        [HttpDelete("deleteJuritico/{cnpj}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]

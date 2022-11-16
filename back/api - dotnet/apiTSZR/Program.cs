@@ -23,6 +23,9 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 // Add services to the container.
 
+// para deixar usar com react
+builder.Services.AddCors();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -36,6 +39,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// para deixar usar com react
+app.UseCors(c =>
+    {
+        c.AllowAnyHeader();
+        c.AllowAnyMethod();
+        c.AllowAnyOrigin();
+    }
+);
 
 app.UseHttpsRedirection();
 

@@ -1,30 +1,33 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"
 import ImagemFundo from "../../assets/Saly-12.png"
+import axios from "axios";
 
 import "./CadastroPessoaCSS.css"
 export default function CadastroPessoa() {
+  let navigate = useNavigate();
     //para trocar a visibilidade (1000 vezes mais facil que no vanilla)
     const [ativo, setAtivo] = useState(false);
     const [ativoII, setAtivoII] = useState(false);
 
     const [clientePes, setClientePes] = useState({
       nome: "",
+      cpf: "",
       email: "",
       telefone: "",
-      cpf: "",
-      endereco:{
-        cep: "",
-        uf: "",
-        rua: "",
-        pontoRed: ""
-      },
       escolha: "",
       equipamento: "",
-      explicacao: ""
+      explicacao: "",
+      uf: "",
+      cep: "",
+      rua: "",
+      pontoRef: ""
     })
-    const {nome, email, telefone, cpf, escolha, equipamento, explicacao} = clientePes;
-    const {cep, uf, rua, pontoRed} = clientePes.endereco;
+    const {nome, cpf, email, telefone, 
+          escolha, equipamento, explicacao, 
+          uf, cep, rua, pontoRef} = clientePes;
+  
     
     const ChangeVisibility = () => {
         setAtivo(!ativo);
@@ -36,6 +39,31 @@ export default function CadastroPessoa() {
       setClientePes({...clientePes, [e.target.name]:e.target.value})
       console.log(escolha)
     }
+    const onInputChange = (e) =>{
+      setClientePes({...clientePes, [e.target.name]:e.target.value})
+  }
+  const onSubmit = async (e) => {
+    //para n mostrar tudo no link
+    e.preventDefault();
+
+
+     await axios.post(`https://localhost:7126/api/Cliente/fisica`, {
+      nome: nome,
+      cpf: cpf,
+      email: email,
+      telefone: telefone,
+      escolha: escolha,
+      equipamento: equipamento,
+      explicacao: explicacao,
+      uf: uf,
+      cep: cep,
+      rua: rua,
+      pontoRef: pontoRef
+     })
+    
+    //nessa caso, a pagina inicial
+    navigate(`/cadastro/confirm/${cpf}/${nome}`)
+} 
   return (
     // <!-- background da pagina -->
     <section className="container-fluid sect-form">
@@ -97,7 +125,7 @@ export default function CadastroPessoa() {
         <h2>Cadastro pessoal</h2>
 
         {/* <!-- começo do formulario pessoa --> */}
-        <form className="form-pessoa" id="form-pessoa" action="" method="post">
+        <form className="form-pessoa" id="form-pessoa" onSubmit={(e) => onSubmit(e)}>
           {/* <!-- PARTE 1 --> */}
           <div className={ativo ? "disp-none" : "nada"} id="formP1">
             {/* <!-- input de texto Nome --> */}
@@ -106,8 +134,10 @@ export default function CadastroPessoa() {
               <input
                 type="text"
                 name="nome"
+                value={nome}
                 placeholder="Nome completo"
                 required
+                onChange={(e)=> onInputChange(e)}
               />
               <div className="underline"></div>
             </div>
@@ -117,8 +147,10 @@ export default function CadastroPessoa() {
               <input
                 type="email"
                 name="email"
+                value={email}
                 placeholder="Digite..."
                 required
+                onChange={(e)=> onInputChange(e)}
               />
               <div className="underline"></div>
             </div>
@@ -128,8 +160,10 @@ export default function CadastroPessoa() {
               <input
                 type="tel"
                 name="telefone"
+                value={telefone}
                 placeholder="(xx) xxxxx-xxxx"
                 required
+                onChange={(e)=> onInputChange(e)}
               />
               <div className="underline"></div>
             </div>
@@ -139,8 +173,10 @@ export default function CadastroPessoa() {
               <input
                 type="text"
                 name="cpf"
+                value={cpf}
                 placeholder="Apenas número"
                 required
+                onChange={(e)=> onInputChange(e)}
               />
               <div className="underline"></div>
             </div>
@@ -153,15 +189,19 @@ export default function CadastroPessoa() {
                 <input
                   type="text"
                   name="cep"
+                  value={cep}
                   placeholder="CEP"
                   required
+                  onChange={(e)=> onInputChange(e)}
                   style={{width: "80%"}}
                 />
                 <input
                   type="text"
                   name="uf"
+                  value={uf}
                   placeholder="UF"
                   required
+                  onChange={(e)=> onInputChange(e)}
                   style={{width: "10%", borderLeft: "2px solid rgba(0,0,0,0.5)"}}
                 />
               </div>
@@ -172,20 +212,24 @@ export default function CadastroPessoa() {
               <label for="endereço">Endereço</label>
               <input
                 type="text"
-                name="endereco"
+                name="rua"
+                value={rua}
                 placeholder="Endereço"
                 required
+                onChange={(e)=> onInputChange(e)}
               />
               <div className="underline"></div>
             </div>
 
             <div className="div-input">
-              <label for="telefone">ponto de Referência</label>
+              <label for="pontoref">ponto de Referência</label>
               <input
                 type="text"
                 name="pontoRef"
+                value={pontoRef}
                 placeholder="Digite..."
                 required
+                onChange={(e)=> onInputChange(e)}
               />
               <div className="underline"></div>
             </div>
@@ -201,7 +245,7 @@ export default function CadastroPessoa() {
                 >
                   <option selected>--</option>
                   <option value="doador">Sou doador</option>
-                  <option value="beneficiario">Preciso de equipamento</option>
+                  <option value="beneficio">Preciso de equipamento</option>
                 </select>
                 <div className="underline"></div>
               </div>
@@ -222,7 +266,9 @@ export default function CadastroPessoa() {
             <div className="div-input">
               <label for="escolha">Qual o dispositivo para doação?</label>
               <select 
-              name="equipamento" 
+              name="equipamento"
+              value={equipamento}
+              onChange={(e)=> onInputChange(e)}
               required>
                 <option value="padrão">--</option>
                 <option value="mobile">Celular</option>
@@ -236,10 +282,12 @@ export default function CadastroPessoa() {
               <label for="especifiicação">Fale sobre o aparelho:</label>
               <textarea
                 name="explicacao"
+                value={explicacao}
                 cols="30"
                 rows="10"
                 placeholder="ano, houve problemas, estado atual,etc..."
                 required
+                onChange={(e)=> onInputChange(e)}
               ></textarea>
 
               <div className="underline"></div>
@@ -253,12 +301,12 @@ export default function CadastroPessoa() {
           </div>
           {/* <!-- PARTE 4 --> */}
           <div
-            className={escolha == "beneficiario" && ativoII && ativo? "nada" : "disp-none"}
+            className={escolha == "beneficio" && ativoII && ativo? "nada" : "disp-none"}
             id="formE4"
           >
             <div class="div-input">
               <label for="especifiicação">Explique sua situação para nós:</label>
-              <textarea name="explicacao" cols="30" rows="10" placeholder="Digite..." required></textarea>
+              <textarea name="explicacao" value={explicacao} cols="30" rows="10" placeholder="Digite..." required onChange={(e)=> onInputChange(e)}></textarea>
 
               <div class="underline"></div>
             </div>

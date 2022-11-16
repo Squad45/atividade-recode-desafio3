@@ -7,6 +7,7 @@ import Cadastro from "./pages/CadastroPage";
 import Contato from "./pages/ContactPage";
 import CadastroPessoa from './pages/CadastroPages/CadastroPessoa';
 import CadastroEmpresa from './pages/CadastroPages/CadastroEmpresa';
+import Confirmar from './pages/CadastroPages/Confirmar';
 
 import Footer from "./components/Geral/Footer";
 import Navbar from "./components/Geral/Navbar";
@@ -25,6 +26,7 @@ function App(){
         <Route exact path="/cadastro/pessoa" element={<CadastroPessoa />} />
         <Route exact path="/cadastro/instituicao" element={<CadastroEmpresa />} />
         <Route exact path="/contato" element={<Contato />} />
+        <Route exact path="/cadastro/confirm/:dado/:nome" element={<Confirmar />} />
         
         </Routes>
 

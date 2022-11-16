@@ -1,30 +1,33 @@
 import React, { useState } from "react";
 import "./CadastroEmpresaCSS.css";
 import ImagemFundo from "../../assets/Saly-12.png";
+import { useNavigate } from "react-router-dom"
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function CadastroEmpresa() {
+  let navigate = useNavigate();
   const [ativo, setAtivo] = useState(false);
   const [ativoII, setAtivoII] = useState(false);
   const [clienteEmp, setClienteEmp] = useState({
-    nomeRep: "",
-    cargoRep: "",
+    nome: "",
+    cnpj: "",
+    cargo: "",
     instituicao: "",
     email: "",
     telefone: "",
-    cnpj: "",
-    endereco: {
-      cep: "",
-      uf: "",
-      pontoRef: "",
-    },
     escolha: "",
     equipamento: "",
-    explicacao: ""
+    explicacao: "",
+    uf: "",
+    cep: "",
+    rua: "",
+    pontoRef: ""
   });
 
-  const { nomeRep, cargoRep, instituicao, email, telefone, cnpj, escolha, equipamento, explicacao } = clienteEmp;
-  const { cep, uf, pontoRef } = clienteEmp.endereco;
+  const { nome, cnpj, cargo, instituicao, 
+    email, telefone, escolha, equipamento, 
+    explicacao, uf, cep,rua, pontoRef, } = clienteEmp
 
   const ChangeVisibility = () => {
     setAtivo(!ativo);
@@ -36,6 +39,33 @@ export default function CadastroEmpresa() {
     setClienteEmp({...clienteEmp, [e.target.name]:e.target.value})
     console.log(escolha)
   }
+  const onInputChange = (e) =>{
+    setClienteEmp({...clienteEmp, [e.target.name]:e.target.value})
+}
+const onSubmit = async (e) => {
+  //para n mostrar tudo no link
+  e.preventDefault();
+
+
+   await axios.post(`https://localhost:7126/api/Cliente/juridica`, {
+    nome: nome,
+    cnpj: cnpj,
+    cargo: cargo,
+    instituicao: instituicao,
+    email: email,
+    telefone: telefone,
+    escolha: escolha,
+    equipamento: equipamento,
+    explicacao: explicacao,
+    uf: uf,
+    cep: cep,
+    rua: rua,
+    pontoRef: pontoRef
+   })
+  
+  //nessa caso, a pagina inicial
+  navigate(`/cadastro/confirm/${cnpj}/${nome}`)
+} 
   return (
     // <!-- background da pagina -->
     <section className="container-fluid sect-form">
@@ -106,7 +136,7 @@ export default function CadastroEmpresa() {
         <h3>Cadastrando Instituição/Empresa</h3>
 
         {/* <!-- começo do formulario pessoa --> */}
-        <form className="form-empresa" id="form-empresa" method="POST">
+        <form className="form-empresa" id="form-empresa" onSubmit={(e) => onSubmit(e)}>
           {/* <!-- PARTE 1 --> */}
           <div 
           className={ativo ? "disp-none" : "nada"} 
@@ -117,7 +147,9 @@ export default function CadastroEmpresa() {
               <input
                 type="text"
                 name="nome"
+                value={nome}
                 placeholder="Nome completo"
+                onChange={(e)=> onInputChange(e)}
                 required
               />
               <div className="underline"></div>
@@ -128,7 +160,9 @@ export default function CadastroEmpresa() {
               <input
                 type="text"
                 name="cargo"
+                value={cargo}
                 placeholder="Digite..."
+                onChange={(e)=> onInputChange(e)}
                 required
               />
               <div className="underline"></div>
@@ -138,8 +172,10 @@ export default function CadastroEmpresa() {
               <label for="nomeEmp">Nome da Empresa/Escola</label>
               <input
                 type="text"
-                name="nomeEmp"
+                name="instituicao"
+                value={instituicao}
                 placeholder="Digite..."
+                onChange={(e)=> onInputChange(e)}
                 required
               />
               <div className="underline"></div>
@@ -150,7 +186,9 @@ export default function CadastroEmpresa() {
               <input
                 type="email"
                 name="email"
+                value={email}
                 placeholder="Digite..."
+                onChange={(e)=> onInputChange(e)}
                 required
               />
               <div className="underline"></div>
@@ -161,7 +199,9 @@ export default function CadastroEmpresa() {
               <input
                 type="tel"
                 name="telefone"
+                value={telefone}
                 placeholder="(xx) xxxxx-xxxx"
+                onChange={(e)=> onInputChange(e)}
                 required
               />
               <div className="underline"></div>
@@ -172,7 +212,9 @@ export default function CadastroEmpresa() {
               <input
                 type="text"
                 name="cnpj"
+                value={cnpj}
                 placeholder="Apenas número"
+                onChange={(e)=> onInputChange(e)}
                 required
               />
               <div className="underline"></div>
@@ -188,15 +230,19 @@ export default function CadastroEmpresa() {
                 <input
                   type="text"
                   name="cep"
+                  value={cep}
                   placeholder="CEP"
+                  onChange={(e)=> onInputChange(e)}
                   required
                   style={{ width: "80%" }}
                 />
                 <input
                   type="text"
                   name="uf"
+                  value={uf}
                   placeholder="UF"
                   required
+                  onChange={(e)=> onInputChange(e)}
                   style={{
                     width: "10%",
                     borderLeft: "2px solid rgba(0,0,0,0.5)",
@@ -210,8 +256,10 @@ export default function CadastroEmpresa() {
               <label for="email">Endereço</label>
               <input
                 type="text"
-                name="endereco"
+                name="rua"
+                value={rua}
                 placeholder="Endereço"
+                onChange={(e)=> onInputChange(e)}
                 required
               />
               <div className="underline"></div>
@@ -222,7 +270,9 @@ export default function CadastroEmpresa() {
               <input
                 type="text"
                 name="pontoRef"
+                value={pontoRef}
                 placeholder="Digite..."
+                onChange={(e)=> onInputChange(e)}
                 required
               />
               <div className="underline"></div>
@@ -238,7 +288,7 @@ export default function CadastroEmpresa() {
                 value={escolha}>
                   <option selected>--</option>
                   <option value="doador">Sou doador</option>
-                  <option value="beneficiario">Preciso de equipamento</option>
+                  <option value="beneficio">Preciso de equipamento</option>
                 </select>
                 <div className="underline"></div>
               </div>
@@ -261,6 +311,8 @@ export default function CadastroEmpresa() {
               <label for="escolha">Qual o dispositivo para doação?</label>
               <select 
               name="equipamento" 
+              value={equipamento}
+              onChange={(e)=> onInputChange(e)}
               required>
                 <option value="padrão">--</option>
                 <option value="mobile">Celular</option>
@@ -274,9 +326,11 @@ export default function CadastroEmpresa() {
               <label for="especifiicação">Fale sobre o aparelho:</label>
               <textarea
                 name="explicacao"
+                value={explicacao}
                 cols="30"
                 rows="10"
                 placeholder="ano, houve problemas, estado atual,etc..."
+                onChange={(e)=> onInputChange(e)}
                 required
               ></textarea>
 
@@ -291,12 +345,12 @@ export default function CadastroEmpresa() {
           </div>
           {/* <!-- PARTE 4 --> */}
           <div
-            className={escolha == "beneficiario" && ativoII && ativo? "nada" : "disp-none"}
+            className={escolha == "beneficio" && ativoII && ativo? "nada" : "disp-none"}
             id="formE4"
           >
             <div class="div-input">
               <label for="especifiicação">Explique sua situação para nós:</label>
-              <textarea name="explicacao" cols="30" rows="10" placeholder="Digite..." required></textarea>
+              <textarea name="explicacao" value={explicacao} cols="30" rows="10" placeholder="Digite..." onChange={(e)=> onInputChange(e)} required></textarea>
 
               <div class="underline"></div>
             </div>
