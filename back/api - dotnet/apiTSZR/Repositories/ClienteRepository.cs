@@ -65,5 +65,11 @@ namespace apiTSZR.Repositories
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
         }
+
+        public bool UpdateCliente(Cliente cliente)
+        {
+            _context.Update(cliente);
+            return Save();
+        }
     }
 }

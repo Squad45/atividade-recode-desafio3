@@ -17,6 +17,7 @@ namespace apiTSZR.Interfaces
 
         bool CreateCliente(Cliente cliente);
         bool DeleteCliente(Cliente cliente);
+        bool UpdateCliente(Cliente cliente);
         bool Save();
     }
 }

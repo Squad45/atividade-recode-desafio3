@@ -82,10 +82,10 @@ namespace apiTSZR.Controllers
         #endregion
 
         #region  "METODOS POST"
-        [HttpPost]
+        [HttpPost("fisica")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateClienteFisico([FromBody]ClienteDto clienteCreate)
+        public IActionResult CreateClienteFisico([FromBody]ClienteDtoFisica clienteCreate)
         {
             // tudo isso para previnir e/ou informar erros
             if(clienteCreate == null)
@@ -115,7 +115,164 @@ namespace apiTSZR.Controllers
             
 
         }
+        [HttpPost("juridica")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateClienteJuridica([FromBody]ClienteDtoJuridica clienteCreate)
+        {
+            // tudo isso para previnir e/ou informar erros
+            if(clienteCreate == null)
+                return BadRequest(ModelState);
+
+            var cliente = _clienteRepository.GetClientes()
+                        .Where(c => c.Cnpj == clienteCreate.Cnpj).FirstOrDefault();
+
+            if(cliente != null)
+            {
+                ModelState.AddModelError("", "cliente ja existente");
+                return StatusCode(422, ModelState);
+            }
+
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var clienteMap = _mapper.Map<Cliente>(clienteCreate);
+            
+            if(!_clienteRepository.CreateCliente(clienteMap))
+            {
+                ModelState.AddModelError("", "Ocorreu algo de errado ao salvar");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Criado com sucesso!");
+            
+
+        }
         #endregion
-        
+
+        #region  "METODOS UPDATE"
+        [HttpPut("fisico/{cpf}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateClienteFisica(string cpf, [FromBody]ClienteDtoFisica updatedCliente)
+        {
+            if(updatedCliente == null)
+                return BadRequest(ModelState);
+
+            if(cpf != updatedCliente.Cpf)
+                return BadRequest(ModelState);
+
+            if(!_clienteRepository.ClienteFisicoExist(cpf))
+                return NotFound();
+
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
+            var ClienteMap = _mapper.Map<Cliente>(updatedCliente);
+
+            if(!_clienteRepository.UpdateCliente(ClienteMap))
+            {
+                ModelState.AddModelError("", "Algo de errado aconteceu ao tentar atualizar um Cliente");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+        [HttpPut("juridico/{cnpj}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateClienteJuridica(string cnpj, [FromBody]ClienteDtoJuridica updatedCliente)
+        {
+            if(updatedCliente == null)
+                return BadRequest(ModelState);
+
+            if(cnpj != updatedCliente.Cnpj)
+                return BadRequest(ModelState);
+
+            if(!_clienteRepository.ClienteJuridicoExist(cnpj))
+                return NotFound();
+
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
+            var ClienteMap = _mapper.Map<Cliente>(updatedCliente);
+
+            if(!_clienteRepository.UpdateCliente(ClienteMap))
+            {
+                ModelState.AddModelError("", "Algo de errado aconteceu ao tentar atualizar um Cliente");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+        #endregion   
+
+        #region  "METODOS DELETE"
+        [HttpDelete("{id}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteCliente(int id)
+        {
+            if(!_clienteRepository.ClienteExist(id))
+                return NotFound();
+
+            var ClienteToDelete = _clienteRepository.GetCliente(id);
+            
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
+            if(!_clienteRepository.DeleteCliente(ClienteToDelete))
+            {
+                ModelState.AddModelError("", "Algo de errado aconteceu ao tentar deletar uma promocão");
+                return StatusCode(500, ModelState);
+            }
+            return NoContent();
+        }
+        [HttpDelete("{cpf}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteClienteFisica(string cpf)
+        {
+            if(!_clienteRepository.ClienteFisicoExist(cpf))
+                return NotFound();
+
+            var ClienteToDelete = _clienteRepository.GetClienteByCPF(cpf);
+            
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
+            if(!_clienteRepository.DeleteCliente(ClienteToDelete))
+            {
+                ModelState.AddModelError("", "Algo de errado aconteceu ao tentar deletar uma promocão");
+                return StatusCode(500, ModelState);
+            }
+            return NoContent();
+        }
+        [HttpDelete("{cnpj}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteClienteJuridica(string cnpj)
+        {
+            if(!_clienteRepository.ClienteJuridicoExist(cnpj))
+                return NotFound();
+
+            var ClienteToDelete = _clienteRepository.GetClienteByCNPJ(cnpj);
+            
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
+            if(!_clienteRepository.DeleteCliente(ClienteToDelete))
+            {
+                ModelState.AddModelError("", "Algo de errado aconteceu ao tentar deletar uma promocão");
+                return StatusCode(500, ModelState);
+            }
+            return NoContent();
+        }
+        #endregion
     }
 }

@@ -38,6 +38,13 @@ namespace apiTSZR.Dto
 
         
         public string Explicacao { get; set; }
+        public string Uf { get; set; }
+
+        public string Cep { get; set; }
+
+        public string Rua { get; set; }
+
+        public string PontoRef { get; set; }
 
     }
 }
