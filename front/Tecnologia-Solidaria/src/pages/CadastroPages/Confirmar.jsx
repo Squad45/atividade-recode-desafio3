@@ -1,7 +1,7 @@
 import React from 'react'
 import "./CadastroEmpresaCSS.css"
 import ImagemFundo from "../../assets/Saly-12.png";
-import { useParams } from 'react-router-dom';
+import { useParams, Link} from 'react-router-dom';
 import axios from 'axios';
 export default function Confirmar() {
     const {dado, nome} = useParams();
@@ -36,8 +36,8 @@ export default function Confirmar() {
             <p style={{color: "black",fontFamily: "var(--font-titulo)", fontWeight: "900"}}>Obrigado por acreditar em nós! Mas, {nome}, caso queira cancelar, basta apertar em cancelar </p>
               <div className="div-input">
                                
-                <button to="/cadastro/instituicao" className="ancora-escolha btn-danger " id="escolha-1">voltar para Home</button>
-                <button to="/cadastro/pessoa" className="ancora-escolha btn-success " id="escolha-2" onClick={(e) => deletardados(e)}>Cancelar</button>
+                <Link to="/" className="ancora-escolha btn-danger " id="escolha-1">voltar para Home</Link>
+                <button className="ancora-escolha btn-success " id="escolha-2" onClick={(e) => deletardados(e)}>Cancelar</button>
                 
               </div>
           </form>
